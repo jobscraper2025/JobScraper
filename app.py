@@ -32,6 +32,7 @@ from google.oauth2.credentials import Credentials
 import base64
 import logging
 from flask import jsonify, session
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 load_dotenv()
 
@@ -529,3 +530,4 @@ if __name__ == "__main__":
         db.create_all()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
