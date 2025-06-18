@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Extracted Emails{% endblock %} {%
+block content %}
+<h1>Extracted Emails Report</h1>
+
+<form method="POST">
+  <label>Start Date:<input name="startdate" type="date" required /></label>
+  <label>End Date:<input name="enddate" type="date" required /></label>
+  <input type="submit" value="View Report" /><br /><br />
+  <a href="{{ url_for('report_pdf', start=start, end=end) }}">Download PDF</a
+  ><br /><br />
+</form>
+
+{% if emails %}
+<table border="1">
+  <tr>
+    <th>Email</th>
+    <th>Source File</th>
+    <th>Date</th>
+  </tr>
+  {% for e in emails %}
+  <tr>
+    <td>{{ e.email }}</td>
+    <td>{{ e.source_file }}</td>
+    <td>{{ e.date.strftime("%Y-%m-%d") }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br />
+
+{% endif %} {% endblock %}

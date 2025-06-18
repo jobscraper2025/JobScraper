@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %}Extracted Emails{% endblock %} {%
+block content %}
+  <main>
+    <h2>Upload PDF Files</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <input
+        type="file"
+        name="pdfs[]"
+        accept="application/pdf"
+        multiple
+        required
+      />
+      <button type="submit">Upload PDFs</button>
+    </form>
+  </main>
+{% endblock %}
